@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <p class="text-sm">This is small text.</p>
     <p class="text-md">This is medium text.</p>
     <p class="text-lg">This is large text.</p>

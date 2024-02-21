@@ -154,3 +154,54 @@
 
 // Call to generate all flex utilities
 .generate-all-flex-utilities();
+
+// ==============================================
+// Container Classes for Responsive Web Design
+// ==============================================
+
+// Purpose:
+// Provides a series of container classes to manage the width of content
+// across different screen sizes. Ensures content is centered and
+// appropriately spaced with padding.
+
+// Variables for Padding and Maximum Widths at Different Breakpoints
+@container-padding: 1rem; // Padding on the sides of the container
+@container-max-width-xs: 20rem; // Max width for extra small devices (default)
+@container-max-width-sm: 30rem; // Max width for small devices (≥576px)
+@container-max-width-md: 45rem; // Max width for medium devices (≥768px)
+@container-max-width-lg: 60rem; // Max width for large devices (≥992px)
+@container-max-width-xl: 75rem; // Max width for extra large devices (≥1200px)
+@container-max-width-xxl: 90rem; // Max width for extra extra large devices (≥1400px)
+
+// Mixin: Container
+// Applies standardized padding and centering, with max-width scaling up at defined breakpoints.
+.container() {
+  width: 100%;
+  padding-right: @container-padding;
+  padding-left: @container-padding;
+  margin-right: auto;
+  margin-left: auto;
+
+  // Responsive Breakpoints
+  @media (min-width: 576px) {
+    max-width: @container-max-width-sm;
+  }
+  @media (min-width: 768px) {
+    max-width: @container-max-width-md;
+  }
+  @media (min-width: 992px) {
+    max-width: @container-max-width-lg;
+  }
+  @media (min-width: 1200px) {
+    max-width: @container-max-width-xl;
+  }
+  @media (min-width: 1400px) {
+    max-width: @container-max-width-xxl;
+  }
+}
+
+// Applying the Mixin to the .container Class
+// Use this class in HTML to wrap content and ensure it is properly centered and constrained.
+.container {
+  .container();
+}
