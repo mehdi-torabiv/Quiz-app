@@ -1,0 +1,156 @@
+// Flexbox Utilities for Responsive Design
+// =======================================
+
+// Flex and Inline-Flex Display Utilities
+// Sets the display property to flex or inline-flex.
+.generate-flex-display-utilities() {
+  .flex {
+    display: flex;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+}
+
+// Flex Direction Utilities
+// Controls the direction of flex items in a flex container.
+.generate-flex-direction-utilities() {
+  .flex-row {
+    flex-direction: row;
+  }
+  .flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-col-reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+// Flex Wrap Utilities
+// Controls the wrap behavior of flex items within a flex container.
+.generate-flex-wrap-utilities() {
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+  .flex-nowrap {
+    flex-wrap: nowrap;
+  }
+}
+
+// Flex Align Utilities
+// Aligns items and content within a flex container.
+.generate-flex-align-utilities() {
+  // Align Items
+  .items-start {
+    align-items: flex-start;
+  }
+  .items-end {
+    align-items: flex-end;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-baseline {
+    align-items: baseline;
+  }
+  .items-stretch {
+    align-items: stretch;
+  }
+
+  // Justify Content
+  .justify-start {
+    justify-content: flex-start;
+  }
+  .justify-end {
+    justify-content: flex-end;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-around {
+    justify-content: space-around;
+  }
+  .justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  // Align Content
+  .content-start {
+    align-content: flex-start;
+  }
+  .content-end {
+    align-content: flex-end;
+  }
+  .content-center {
+    align-content: center;
+  }
+  .content-between {
+    align-content: space-between;
+  }
+  .content-around {
+    align-content: space-around;
+  }
+  .content-stretch {
+    align-content: stretch;
+  }
+
+  // Align Self
+  .self-auto {
+    align-self: auto;
+  }
+  .self-start {
+    align-self: flex-start;
+  }
+  .self-end {
+    align-self: flex-end;
+  }
+  .self-center {
+    align-self: center;
+  }
+  .self-stretch {
+    align-self: stretch;
+  }
+  .self-baseline {
+    align-self: baseline;
+  }
+}
+
+// Flex Grow and Shrink Utilities
+// Controls the ability of a flex item to grow or shrink.
+.generate-flex-grow-shrink-utilities() {
+  .flex-grow {
+    flex-grow: 1;
+  }
+  .flex-grow-0 {
+    flex-grow: 0;
+  }
+
+  .flex-shrink {
+    flex-shrink: 1;
+  }
+  .flex-shrink-0 {
+    flex-shrink: 0;
+  }
+}
+
+// Generating All Utilities
+// Calls each mixin to generate the flexbox utility classes.
+.generate-all-flex-utilities() {
+  .generate-flex-display-utilities();
+  .generate-flex-direction-utilities();
+  .generate-flex-wrap-utilities();
+  .generate-flex-align-utilities();
+  .generate-flex-grow-shrink-utilities();
+}
+
+// Call to generate all flex utilities
+.generate-all-flex-utilities();
