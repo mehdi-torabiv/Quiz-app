@@ -30,7 +30,7 @@ const props = defineProps({
 });
 
 // Computed properties for generating class names based on props
-const bgClass = computed(() => (props.bgColor ? `bg-${props.bgColor}` : ''));
+const bgClass = computed(() => (props.bgColor ? `bg-${props.bgColor}` : 'bg-white'));
 const textClass = computed(() => (props.textColor ? `text-${props.textColor}` : ''));
 const paddingClass = computed(() => (props.padding ? `p-${props.padding}` : ''));
 const marginClass = computed(() => (props.margin ? `m-${props.margin}` : ''));

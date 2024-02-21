@@ -84,3 +84,21 @@
 }
 // Generate fractional width classes
 .generate-fraction-widths();
+
+@space-max: 10;
+
+.generate-space-x(@index) when (@index > 0) {
+  .generate-space-x(@index - 1);
+  .space-x-@{index} > *:not(:last-child) {
+    margin-right: @index * 0.25rem;
+  }
+}
+.generate-space-x(@space-max);
+
+.generate-space-y(@index) when (@index > 0) {
+  .generate-space-y(@index - 1);
+  .space-y-@{index} > *:not(:last-child) {
+    margin-bottom: @index * 0.25rem;
+  }
+}
+.generate-space-y(@space-max);
