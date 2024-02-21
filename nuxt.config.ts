@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['./assets/styles/_main.less'],
+  app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
+  },
   vite: {
     css: {
       preprocessorOptions: {

@@ -10,7 +10,7 @@ import FCard from '../components/shared/FCard.vue';
       <div class="flex flex-col">
         <FTypographi tag="h1" size="5xl">Welcome to Fast track Quiz app!</FTypographi>
         <div class="flex flex-row jusitfy-between">
-          <FButton color-class="bg-secondary" class="text-white">Start Quiz</FButton>
+          <FButton color-class="bg-secondary" class="text-white" @click="$router.push('/quiz')">Start Quiz</FButton>
           <FButton color-class="bg-info" class="text-white">See Ranking</FButton>
         </div>
       </div>
