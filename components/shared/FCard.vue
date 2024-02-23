@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 
 /**
  * Defines the props accepted by the CardComponent.

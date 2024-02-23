@@ -102,3 +102,19 @@
   }
 }
 .generate-space-y(@space-max);
+
+.text-align(@alignment) {
+  text-align: @alignment;
+}
+
+.text-left {
+  .text-align(left);
+}
+
+.text-center {
+  .text-align(center);
+}
+
+.text-right {
+  .text-align(right);
+}
