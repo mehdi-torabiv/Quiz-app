@@ -3,8 +3,8 @@ export type Quiz = {
   answers: string[];
 };
 
-export type QuizQuestion {
+export type QuizQuestion = {
   question: string;
   answers: string[];
   correct: string;
-}
+};
