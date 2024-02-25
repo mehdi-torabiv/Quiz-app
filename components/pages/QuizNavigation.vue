@@ -1,7 +1,14 @@
 <template>
   <div class="flex flex-row justify-between">
-    <FButton size="xl" :disabled="!hasPrev" @click="prev">Previous</FButton>
-    <FButton size="xl" :disabled="!hasNext" @click="next">Next</FButton>
+    <div>
+      <FButton v-if="hasPrev" size="xl" @click="prev">Previous</FButton>
+      <FButton v-else size="xl" @click="backToMain">Back to Main</FButton>
+    </div>
+
+    <div>
+      <FButton v-if="hasNext" size="xl" @click="next">Next</FButton>
+      <FButton v-else size="xl" @click="submitQuiz">Submit Quiz</FButton>
+    </div>
   </div>
 </template>
 
@@ -11,8 +18,10 @@ const props = defineProps({
   hasPrev: Boolean,
 });
 
-const emit = defineEmits(['next', 'prev']);
+const emit = defineEmits(['next', 'prev', 'backToMain', 'submit']);
 
 const next = () => emit('next');
 const prev = () => emit('prev');
+const backToMain = () => emit('backToMain');
+const submitQuiz = () => emit('submit');
 </script>

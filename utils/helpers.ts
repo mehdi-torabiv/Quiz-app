@@ -5,5 +5,5 @@ export function transformApiResponse(apiResponse: ApiResponse): QuizQuestion[] |
   // Directly return the data part of the response
   // Assuming apiResponse directly has the properties you mentioned
   // and doesn't need unwrapping from a Proxy/Ref.
-  return apiResponse.data;
+  return apiResponse?.data;
 }

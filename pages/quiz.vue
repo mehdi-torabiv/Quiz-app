@@ -1,9 +1,15 @@
 <template>
   <div class="container center-xy w-1/2 mx-auto">
-    <QuizQuestion v-if="questions.length > 0" :quiz="questions[currentQuestionIndex]" />
+    <QuizQuestion
+      v-if="questions.length > 0"
+      :quiz="questions[currentQuestionIndex]"
+      @selected-answer="handleSetSelectedAnswer"
+    />
     <QuizNavigation
       @next="gotoNextQuestion"
       @prev="gotoPrevQuestion"
+      @back-to-main="backToMain"
+      @submit="submitQuiz"
       :has-next="hasNextQuestion"
       :has-prev="hasPrevQuestion"
     />
@@ -16,50 +22,59 @@ import { type QuizQuestion } from '../utils/types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
 
 /**
- * A Vue component for displaying quiz questions and navigation buttons to move between questions.
- * It utilizes a dynamic import for the QuizQuestion type and leverages the QuestionsApi service
- * to fetch and display a list of quiz questions. Navigation through the questions is managed by
- * computed properties and methods that update the current question index.
+ * @file This file contains a Vue component for displaying quiz questions and navigating through them.
+ * It demonstrates fetching data from an API, managing state with reactive references, and handling user interactions.
  */
 
 /**
- * The list of questions for the quiz, stored as a reactive Vue reference.
- * Each question is an object containing the question text, an array of answers,
- * and the correct answer.
- *
- * @type {Ref<QuizQuestion[]>} questions - A reactive reference to an array of QuizQuestion objects.
+ * @section State and Data Fetching
  */
-const questions: Ref<QuizQuestion[]> = ref<QuizQuestion[]>([]);
 
-// Fetch quiz questions from the API and transform the response for use in the component.
+/**
+ * Reactive reference to an array of QuizQuestion objects, representing the list of questions for the quiz.
+ * Initially empty and populated by fetching data from an API.
+ * @type {Ref<QuizQuestion[]>}
+ */
+const questions: Ref<QuizQuestion[]> = ref([]);
+
+// Fetch quiz questions from the API and populate the `questions` reactive reference.
 const data = await QuestionsApi.getQuestions();
 questions.value = transformApiResponse(data);
 
 /**
- * The current index of the question being displayed, stored as a reactive Vue reference.
- * This index is used to determine which question to show in the QuizQuestion component.
- *
- * @type {Ref<number>} currentQuestionIndex - A reactive reference to the current question index.
+ * Reactive reference for storing user-selected answers. Initialized with null values, indicating unanswered questions.
+ * @type {Ref<(number | null)[]>}
+ */
+const answers: Ref<(number | null)[]> = ref<(number | null)[]>(new Array(questions.value.length).fill(null));
+
+/**
+ * Reactive reference to track the current index of the question being displayed.
+ * @type {Ref<number>}
  */
 const currentQuestionIndex: Ref<number> = ref(0);
 
 /**
- * Computed property that determines if there is a next question in the quiz.
- *
- * @returns {boolean} True if there is a next question available, false otherwise.
+ * @section Computed Properties for Navigation
+ */
+
+/**
+ * Determines if there is a next question available in the quiz.
+ * @returns {boolean}
  */
 const hasNextQuestion = computed((): boolean => currentQuestionIndex.value < questions.value.length - 1);
 
 /**
- * Computed property that determines if there is a previous question in the quiz.
- *
- * @returns {boolean} True if there is a previous question available, false otherwise.
+ * Determines if there is a previous question available in the quiz.
+ * @returns {boolean}
  */
 const hasPrevQuestion = computed((): boolean => currentQuestionIndex.value > 0);
 
 /**
- * Advances to the next question in the quiz if one is available.
- * This is triggered by user interaction with the QuizNavigation component.
+ * @section Event Handlers
+ */
+
+/**
+ * Advances to the next question in the quiz if available.
  */
 const gotoNextQuestion = (): void => {
   if (hasNextQuestion.value) {
@@ -68,12 +83,45 @@ const gotoNextQuestion = (): void => {
 };
 
 /**
- * Goes back to the previous question in the quiz if one is available.
- * This is triggered by user interaction with the QuizNavigation component.
+ * Returns to the previous question in the quiz if available.
  */
 const gotoPrevQuestion = (): void => {
   if (hasPrevQuestion.value) {
     currentQuestionIndex.value -= 1;
+  }
+};
+
+/**
+ * Stores the selected answer for the current question in the quiz.
+ * @param {QuizAnswer} selectedAnswer - The answer selected by the user.
+ */
+function handleSetSelectedAnswer(selectedAnswer: number) {
+  answers.value[currentQuestionIndex.value] = selectedAnswer;
+}
+
+/**
+ * @section Navigation
+ */
+
+// Utilize Vue Router for programmatically navigating the user.
+const router = useRouter();
+
+/**
+ * Navigates the user back to the main page.
+ */
+const backToMain = (): void => {
+  console.log('Back to main');
+  router.push('/');
+};
+
+/**
+ * Handles the submission of the quiz, such as validating answers and potentially sending them to a server.
+ */
+const submitQuiz = async (): Promise<void> => {
+  try {
+    QuestionsApi.submitAnswers(answers.value);
+  } catch (error) {
+    console.error('Error submitting quiz:', error);
   }
 };
 </script>
