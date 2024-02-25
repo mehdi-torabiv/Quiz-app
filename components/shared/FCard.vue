@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 
 /**
  * Defines the props accepted by the CardComponent.
@@ -30,7 +29,7 @@ const props = defineProps({
 });
 
 // Computed properties for generating class names based on props
-const bgClass = computed(() => (props.bgColor ? `bg-${props.bgColor}` : ''));
+const bgClass = computed(() => (props.bgColor ? `bg-${props.bgColor}` : 'bg-white'));
 const textClass = computed(() => (props.textColor ? `text-${props.textColor}` : ''));
 const paddingClass = computed(() => (props.padding ? `p-${props.padding}` : ''));
 const marginClass = computed(() => (props.margin ? `m-${props.margin}` : ''));

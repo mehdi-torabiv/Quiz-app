@@ -2,15 +2,41 @@
 @import './_variables.less';
 @import './_utilities.less';
 @import './_mixins.less';
+@import './_breakdowns.less';
+
+@font-family-base: 'Montserrat', sans-serif;
+@background-start-color: rgba(0, 87, 190, 0.958);
+@background-end-color: rgba(13, 12, 106, 1);
+
+.setBackground() {
+  background: @background-start-color;
+  background: radial-gradient(circle, @background-start-color 0%, @background-end-color 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+  background-position: center;
+  overflow-x: hidden;
+}
 
 *,
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: @font-family-base;
+}
+
+body {
+  .setBackground();
 }
 
 .mx-auto {
   margin: 0 auto !important;
+}
+
+.center-xy {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

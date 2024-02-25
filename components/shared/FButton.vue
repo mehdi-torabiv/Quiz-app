@@ -1,5 +1,11 @@
 <template>
-  <button :class="['base-button', colorClass, variantClass, sizeClass]" @click="handleClick" v-bind="$attrs">
+  <button
+    :class="['base-button', colorClass, variantClass, sizeClass]"
+    v-bind="$attrs"
+    :disabled="disabled"
+    :aria-label="ariaLabel"
+    @click="handleClick"
+  >
     <slot></slot>
   </button>
 </template>
@@ -8,33 +14,39 @@
 import { defineProps, defineEmits, computed } from 'vue';
 
 /**
- * Defines props for Button component.
- * @property {String} colorClass - The class to set the button's background color. Must start with 'bg-'.
- * @property {String} variant - The button's variant ('outlined', 'contained', 'text').
- * @property {String} size - The size of the button ('xs', 'sm', 'md', 'lg', 'xl').
+ * Props for the Button component.
+ * @typedef {Object} ButtonProps
+ * @property {String} [colorClass=bg-primary] - The class to set the button's background color. Must start with 'bg-'.
+ * @property {String} [variant=contained] - The button's variant ('outlined', 'contained', 'text').
+ * @property {String} [size=md] - The size of the button ('xs', 'sm', 'md', 'lg', 'xl').
+ * @property {Boolean} [disabled=false] - Whether the button is disabled.
+ * @property {String} [type=button] - The type of button ('button', 'submit', 'reset').
+ * @property {String} [ariaLabel] - Aria label for accessibility.
  */
+
+/** @type {ButtonProps} */
 const props = defineProps({
   colorClass: {
     type: String,
     default: 'bg-primary',
-    validator: (value: string) => {
-      return value.startsWith('bg-');
-    },
+    validator: (value: string) => typeof value === 'string' && value.startsWith('bg-'),
   },
   variant: {
     type: String,
     default: 'contained',
-    validator: (value: string) => {
-      return ['outlined', 'contained', 'text'].includes(value);
-    },
+    validator: (value: string) => typeof value === 'string' && ['outlined', 'contained', 'text'].includes(value),
   },
   size: {
     type: String,
     default: 'md',
-    validator: (value: string) => {
-      return ['xs', 'sm', 'md', 'lg', 'xl'].includes(value);
-    },
+    validator: (value: string) => typeof value === 'string' && ['xs', 'sm', 'md', 'lg', 'xl'].includes(value),
   },
+  disabled: Boolean,
+  type: {
+    type: String,
+    default: 'button',
+  },
+  ariaLabel: String,
 });
 
 /**
@@ -60,14 +72,15 @@ const sizeClass = computed(() => `size-${props.size}`);
 
 const emit = defineEmits(['click']);
 
+/**
+ * Handles click event on the button.
+ */
 const handleClick = () => {
   emit('click');
 };
 </script>
 
 <style lang="less" scoped>
-@import '../../assets/styles/_variables.less';
-
 .base-button {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
@@ -77,6 +90,7 @@ const handleClick = () => {
     color 0.2s;
   &.outlined {
     background-color: transparent;
+    border: 1px solid currentColor;
   }
   &.contained {
     border: 0;
@@ -109,5 +123,10 @@ const handleClick = () => {
 
 .base-button:hover {
   filter: brightness(90%);
+}
+
+.base-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
 }
 </style>
