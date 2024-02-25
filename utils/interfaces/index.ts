@@ -1,7 +1,8 @@
-export interface ApiResponse {
+export interface ApiResponse<T = any> {
   statusCode: number;
   statusMessage: string;
-  data: any[];
+  data?: T;
+  cause?: any;
 }
 
 export interface ISetResponse {

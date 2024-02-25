@@ -26,6 +26,7 @@ import { ref, computed } from 'vue';
 import { type QuizQuestion } from '../utils/types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
 import { StorageService } from '../services/StorageService';
+import { ScoreboardApi } from '#build/services/ApiServices/ScoreboardApi';
 
 let showUserRankNotification = ref<boolean>(false);
 let userRankNotificationMessage = ref<string>('');
@@ -142,7 +143,7 @@ const updateScoreboard = async (correctCount: string | number) => {
     const user = StorageService.readLocalStorage('user');
 
     if (user) {
-      const data = await QuestionsApi.updateScoreboard({
+      const data = await ScoreboardApi.updateScoreboard({
         username: user.username,
         email: user.email,
         correctCount,
