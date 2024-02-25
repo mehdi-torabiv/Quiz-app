@@ -1,5 +1,5 @@
 import { H3Event } from 'h3';
-import { ISetResponse } from '~/utils/types';
+import { ISetResponse } from '../../utils/interfaces';
 
 const setResponse = (event: H3Event, responseData: ISetResponse) => {
   event.node.res.statusCode = responseData.statusCode;

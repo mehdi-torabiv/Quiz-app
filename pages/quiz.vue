@@ -1,18 +1,23 @@
 <template>
   <div class="container center-xy w-1/2 mx-auto">
-    <QuizQuestion
-      v-if="questions.length > 0"
-      :quiz="questions[currentQuestionIndex]"
-      @selected-answer="handleSetSelectedAnswer"
-    />
-    <QuizNavigation
-      @next="gotoNextQuestion"
-      @prev="gotoPrevQuestion"
-      @back-to-main="backToMain"
-      @submit="submitQuiz"
-      :has-next="hasNextQuestion"
-      :has-prev="hasPrevQuestion"
-    />
+    <div v-if="!showUserRankNotification">
+      <QuizQuestion
+        v-if="questions.length > 0"
+        :quiz="questions[currentQuestionIndex]"
+        @selected-answer="handleSetSelectedAnswer"
+      />
+      <QuizNavigation
+        @next="gotoNextQuestion"
+        @prev="gotoPrevQuestion"
+        @back-to-main="backToMain"
+        @submit="submitQuiz"
+        :has-next="hasNextQuestion"
+        :has-prev="hasPrevQuestion"
+      />
+    </div>
+    <div v-else>
+      <UserRankNotification :message="userRankNotificationMessage" />
+    </div>
   </div>
 </template>
 
@@ -20,6 +25,10 @@
 import { ref, computed } from 'vue';
 import { type QuizQuestion } from '../utils/types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
+import { StorageService } from '../services/StorageService';
+
+let showUserRankNotification = ref<boolean>(false);
+let userRankNotificationMessage = ref<string>('');
 
 /**
  * @file This file contains a Vue component for displaying quiz questions and navigating through them.
@@ -119,9 +128,37 @@ const backToMain = (): void => {
  */
 const submitQuiz = async (): Promise<void> => {
   try {
-    QuestionsApi.submitAnswers(answers.value);
+    const data = await QuestionsApi.submitAnswers(answers.value);
+    const { correctCount } = transformApiResponse(data);
+    console.log({ correctCount });
+
+    updateScoreboard(correctCount);
   } catch (error) {
     console.error('Error submitting quiz:', error);
+  }
+};
+
+const updateScoreboard = async (correctCount: string) => {
+  try {
+    const user = StorageService.readLocalStorage('user');
+    console.log({ user });
+
+    if (user) {
+      const data = await QuestionsApi.updateScoreboard({
+        username: user.username,
+        email: user.email,
+        correctCount,
+      });
+      console.log({ data });
+      const a = transformApiResponse(data);
+      showUserRankNotification.value = true;
+      userRankNotificationMessage.value = a.notificationMessage;
+      console.log(a);
+    } else {
+      console.error('User data not found in local storage');
+    }
+  } catch (error) {
+    console.error('Error updating scoreboard:', error);
   }
 };
 </script>
