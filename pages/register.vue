@@ -3,8 +3,8 @@
     <FCard class="w-1/2 text-center center-xy">
       <FTypographi tag="h1" size="2xl"> Register your self! </FTypographi>
       <div class="flex flex-col p-12 space-y-5">
-        <input type="text" v-model="user.username" />
-        <input type="text" v-model="user.email" />
+        <FInput type="text" v-model="user.username" label="Username" />
+        <FInput type="text" v-model="user.email" label="Email" />
         <FButton @click="register">Register</FButton>
       </div>
     </FCard>
