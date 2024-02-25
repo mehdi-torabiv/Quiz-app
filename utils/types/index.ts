@@ -1,10 +1,20 @@
 export type Quiz = {
-  question: string;
-  answers: string[];
+  questionText: string;
+  answers: QuizAnswer[];
 };
 
 export type QuizQuestion = {
+  _id: string;
   question: string;
-  answers: string[];
+  answers: QuizAnswer[];
   correct: string;
 };
+
+export type QuizAnswer = { _id: string; text: string };
+
+export interface ISetResponse {
+  statusCode: number;
+  statusMessage: string;
+  data?: any;
+  cause?: any;
+}
