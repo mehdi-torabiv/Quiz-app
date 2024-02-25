@@ -12,9 +12,7 @@ export type QuizQuestion = {
 
 export type QuizAnswer = { _id: string; text: string };
 
-export interface ISetResponse {
-  statusCode: number;
-  statusMessage: string;
-  data?: any;
-  cause?: any;
-}
+export type userType = {
+  username: string;
+  email: string;
+};
