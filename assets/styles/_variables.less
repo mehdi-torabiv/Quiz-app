@@ -1,0 +1,201 @@
+// ==============================
+// Variables
+// ==============================
+@color-success: #4caf50;
+@color-error: #f44336;
+@color-warning: #ff9800;
+@color-info: #2196f3;
+@color-attention: #ffeb3b;
+@color-secondary: #9c27b0;
+@color-white: #ffffff;
+@color-black: #000000;
+
+// Font size definitions
+@font-sizes:
+  xs 0.75rem,
+  sm 0.875rem,
+  md 1rem,
+  lg 1.125rem,
+  xl 1.25rem,
+  2xl 1.5rem,
+  3xl 1.75rem,
+  4xl 2rem,
+  5xl 2.25rem;
+
+// ==============================
+// Mixins
+// ==============================
+
+// Mixin: Generate Text Color Classes
+// Generates utility classes for setting text color.
+.generateTextColorClasses() {
+  .text-success {
+    color: @color-success;
+  }
+  .text-error {
+    color: @color-error;
+  }
+  .text-warning {
+    color: @color-warning;
+  }
+  .text-info {
+    color: @color-info;
+  }
+  .text-attention {
+    color: @color-attention;
+  }
+  .text-secondary {
+    color: @color-secondary;
+  }
+  .text-white {
+    color: @color-white;
+  }
+  .text-black {
+    color: @color-black;
+  }
+}
+
+// Mixin: Generate Background Color Classes
+// Generates utility classes for setting background color.
+.generateBackgroundColorClasses() {
+  .bg-success {
+    background-color: @color-success;
+  }
+  .bg-error {
+    background-color: @color-error;
+  }
+  .bg-warning {
+    background-color: @color-warning;
+  }
+  .bg-info {
+    background-color: @color-info;
+  }
+  .bg-attention {
+    background-color: @color-attention;
+  }
+  .bg-secondary {
+    background-color: @color-secondary;
+  }
+  .bg-white {
+    background-color: @color-white;
+  }
+  .bg-black {
+    background-color: @color-black;
+  }
+}
+
+// Mixin: Generate Font Size Classes
+// Dynamically generates classes to adjust font size.
+// Utilizes a loop for each defined font size in @font-sizes.
+.generate-font-sizes(@index) when (@index > 0) {
+  @size: extract(@font-sizes, @index);
+  @name: extract(@size, 1);
+  @value: extract(@size, 2);
+
+  // Create class with dynamic name and font size
+  .text-@{name} {
+    font-size: @value;
+  }
+
+  // Recursive call for next item
+  .generate-font-sizes(@index - 1);
+}
+
+// ==============================
+// Utility Class Generation
+// ==============================
+
+// Generate text color utility classes
+.generateTextColorClasses();
+
+// Generate background color utility classes
+.generateBackgroundColorClasses();
+
+// Generate font size utility classes
+// Initiates the generation process for font size classes based on defined sizes.
+.generate-font-sizes(length(@font-sizes));
+
+// ==============================
+// Spacing Utility Generation
+// ==============================
+
+// Base unit for spacing (e.g., 0.25rem represents 4 units equals 1rem)
+@base-spacing-unit: 0.25rem;
+
+// Mixin: Generate Padding Classes
+// Generates utility classes for padding from 1 to 20.
+.generate-padding-classes() {
+  // Loop from 1 through 20
+  .loop(@index) when (@index <= 20) {
+    @padding-value: (@index * @base-spacing-unit);
+    .p-@{index} {
+      padding: @padding-value;
+    }
+    .pt-@{index} {
+      padding-top: @padding-value;
+    }
+    .pr-@{index} {
+      padding-right: @padding-value;
+    }
+    .pb-@{index} {
+      padding-bottom: @padding-value;
+    }
+    .pl-@{index} {
+      padding-left: @padding-value;
+    }
+    .px-@{index} {
+      padding-left: @padding-value;
+      padding-right: @padding-value;
+    }
+    .py-@{index} {
+      padding-top: @padding-value;
+      padding-bottom: @padding-value;
+    }
+
+    // Next iteration
+    .loop(@index + 1);
+  }
+  // Initial call to start the loop
+  .loop(1);
+}
+
+// Mixin: Generate Margin Classes
+// Generates utility classes for margin from 1 to 20.
+.generate-margin-classes() {
+  // Loop from 1 through 20
+  .loop(@index) when (@index <= 20) {
+    @margin-value: (@index * @base-spacing-unit);
+    .m-@{index} {
+      margin: @margin-value;
+    }
+    .mt-@{index} {
+      margin-top: @margin-value;
+    }
+    .mr-@{index} {
+      margin-right: @margin-value;
+    }
+    .mb-@{index} {
+      margin-bottom: @margin-value;
+    }
+    .ml-@{index} {
+      margin-left: @margin-value;
+    }
+    .mx-@{index} {
+      margin-left: @margin-value;
+      margin-right: @margin-value;
+    }
+    .my-@{index} {
+      margin-top: @margin-value;
+      margin-bottom: @margin-value;
+    }
+
+    // Next iteration
+    .loop(@index + 1);
+  }
+  // Initial call to start the loop
+  .loop(1);
+}
+
+// Call mixins to generate utility classes
+.generate-padding-classes();
+.generate-margin-classes();
