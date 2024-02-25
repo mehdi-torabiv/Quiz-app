@@ -5,7 +5,7 @@
       <div class="flex flex-col p-12 space-y-5">
         <FInput type="text" v-model="user.username" label="Username" />
         <FInput type="text" v-model="user.email" label="Email" />
-        <FButton @click="register">Register</FButton>
+        <FButton @click="register" :disabled="isUserFieldEmpty">Register</FButton>
       </div>
     </FCard>
   </div>
@@ -19,6 +19,10 @@ import { StorageService } from '../services/StorageService';
 const user = ref<userType>({
   username: '',
   email: '',
+});
+
+const isUserFieldEmpty = computed(() => {
+  return user.value.username === '' || user.value.email === '';
 });
 
 const router = useRouter();
