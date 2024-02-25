@@ -25,6 +25,8 @@ const router = useRouter();
 
 const register = async () => {
   try {
+    console.log(user.value);
+
     const response = await UsersApi.createNewUser(user.value.username, user.value.email);
 
     // needs to fix issue with response type

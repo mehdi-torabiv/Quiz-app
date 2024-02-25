@@ -16,7 +16,7 @@ export default defineNuxtConfig({
   },
   components: {
     global: true,
-    dirs: ['./components/shared', './components/pages'],
+    dirs: ['./components/shared', './components/pages/quiz'],
   },
   runtimeConfig: {
     MONGO_URL: process.env.MONGO_URL,

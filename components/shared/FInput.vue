@@ -1,13 +1,22 @@
-<!-- FInput.vue -->
 <template>
   <div class="input-wrapper">
     <label :for="inputId" class="text-left">{{ label }}</label>
-    <input :type="type" v-model="inputValue" :id="inputId" :placeholder="placeholder" :class="inputClass" />
+    <input
+      :type="type"
+      v-model="inputValue"
+      :id="inputId"
+      :placeholder="placeholder"
+      :class="inputClass"
+      @input="updateInputValue($event)"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref, computed } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
+
+// Define the emitted events
+const emits = defineEmits(['update:modelValue']);
 
 /**
  * FInput component provides a styled input field with an optional label.
@@ -38,6 +47,14 @@ const props = defineProps({
 
 const inputId = ref(`f-input-${Math.random().toString(36).substr(2, 9)}`);
 const inputValue = ref('');
+
+// Update the inputValue when the input value changes
+const updateInputValue = (event: Event) => {
+  const value = (event.target as HTMLInputElement).value;
+  inputValue.value = value;
+  // Emit the updated input value
+  emits('update:modelValue', value);
+};
 </script>
 
 <style scoped>
