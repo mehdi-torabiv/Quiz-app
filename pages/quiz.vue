@@ -119,7 +119,6 @@ const router = useRouter();
  * Navigates the user back to the main page.
  */
 const backToMain = (): void => {
-  console.log('Back to main');
   router.push('/');
 };
 
@@ -138,10 +137,9 @@ const submitQuiz = async (): Promise<void> => {
   }
 };
 
-const updateScoreboard = async (correctCount: string) => {
+const updateScoreboard = async (correctCount: string | number) => {
   try {
     const user = StorageService.readLocalStorage('user');
-    console.log({ user });
 
     if (user) {
       const data = await QuestionsApi.updateScoreboard({
@@ -149,11 +147,10 @@ const updateScoreboard = async (correctCount: string) => {
         email: user.email,
         correctCount,
       });
-      console.log({ data });
-      const a = transformApiResponse(data);
+      const questionResult = transformApiResponse(data);
+
       showUserRankNotification.value = true;
-      userRankNotificationMessage.value = a.notificationMessage;
-      console.log(a);
+      userRankNotificationMessage.value = questionResult.notificationMessage;
     } else {
       console.error('User data not found in local storage');
     }

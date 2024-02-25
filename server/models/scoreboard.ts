@@ -18,7 +18,7 @@ const scoreboardSchema: Schema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User', required: false },
   username: { type: String, required: true },
   email: { type: String, required: true },
-  score: { type: Number, required: true, min: 1, max: 10 },
+  score: { type: Number, required: true, min: 0, max: 10 },
   createdAt: { type: Date, default: Date.now },
 });
 
