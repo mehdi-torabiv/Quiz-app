@@ -1,5 +1,3 @@
-<script lang="ts" setup></script>
-
 <template>
   <div class="container">
     <FCard class="px-6 py-6 w-1/2 center-xy">
@@ -17,5 +15,12 @@
     </FCard>
   </div>
 </template>
+
+<script lang="ts" setup>
+useHead({
+  title: 'Home',
+  meta: [{ name: 'description', content: 'Quiz app for Fast-track' }],
+});
+</script>
 
 <style></style>

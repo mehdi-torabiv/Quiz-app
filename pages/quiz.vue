@@ -7,12 +7,12 @@
         @selected-answer="handleSetSelectedAnswer"
       />
       <QuizNavigation
+        :has-next="hasNextQuestion"
+        :has-prev="hasPrevQuestion"
         @next="gotoNextQuestion"
         @prev="gotoPrevQuestion"
         @back-to-main="backToMain"
         @submit="submitQuiz"
-        :has-next="hasNextQuestion"
-        :has-prev="hasPrevQuestion"
       />
     </div>
     <div v-else>
@@ -26,10 +26,15 @@ import { ref, computed } from 'vue';
 import { type QuizQuestion } from '../utils/types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
 import { StorageService } from '../services/StorageService';
-import { ScoreboardApi } from '#build/services/ApiServices/ScoreboardApi';
+import { ScoreboardApi } from '../services/ApiServices/ScoreboardApi';
 
-let showUserRankNotification = ref<boolean>(false);
-let userRankNotificationMessage = ref<string>('');
+useHead({
+  title: 'Quiz',
+  meta: [{ name: 'description', content: 'Quiz app for Fast-track' }],
+});
+
+const showUserRankNotification = ref<boolean>(false);
+const userRankNotificationMessage = ref<string>('');
 
 /**
  * @file This file contains a Vue component for displaying quiz questions and navigating through them.

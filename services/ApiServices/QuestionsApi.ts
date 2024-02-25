@@ -8,6 +8,7 @@ export class QuestionsApi {
 
     return data.value;
   }
+
   public static async submitAnswers(selectedAnswerIndices: (number | null)[]) {
     const { data } = await useFetch(`/api/questions`, {
       server: true,

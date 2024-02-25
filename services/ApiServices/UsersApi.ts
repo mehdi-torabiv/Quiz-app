@@ -8,6 +8,7 @@ export class UsersApi {
 
     return data.value;
   }
+
   public static async createNewUser(username: string, email: string) {
     const { data } = await useFetch('/api/users', {
       server: true,

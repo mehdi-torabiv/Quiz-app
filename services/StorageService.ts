@@ -23,13 +23,16 @@ export class StorageService {
       return undefined;
     }
   }
+
   public static writeLocalStorage<T>(key: string, value: T): void {
     const v = typeof value === 'object' ? JSON.stringify(value) : String(value);
     localStorage.setItem(STORAGE_PREFIX + key, v);
   }
+
   public static removeLocalStorage(key: string): void {
     localStorage.removeItem(STORAGE_PREFIX + key);
   }
+
   public static updateLocalStorageWithObject<T extends object>(
     key: string,
     newObjectKey: string,

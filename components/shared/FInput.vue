@@ -2,9 +2,9 @@
   <div class="input-wrapper">
     <label :for="inputId" class="text-left">{{ label }}</label>
     <input
-      :type="type"
-      v-model="inputValue"
       :id="inputId"
+      v-model="inputValue"
+      :type="type"
       :placeholder="placeholder"
       :class="inputClass"
       @input="updateInputValue($event)"

@@ -1,5 +1,5 @@
-import Scoreboard from '~/server/models/scoreboard';
 import setResponse from '../utils/set-response';
+import Scoreboard from '~/server/models/scoreboard';
 
 async function calculatePercentile(userRank: number, totalScores: number): Promise<string> {
   const percentile = (userRank / totalScores) * 100;
@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
         return setResponse(event, { statusCode: 400, statusMessage: 'Invalid input data' });
       }
 
-      let existingScoreboard = await Scoreboard.findOne({ $or: [{ email }, { username }] });
+      const existingScoreboard = await Scoreboard.findOne({ $or: [{ email }, { username }] });
 
       if (existingScoreboard) {
         existingScoreboard.score = score;

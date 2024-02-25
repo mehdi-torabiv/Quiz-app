@@ -1,5 +1,5 @@
-import Question from '~/server/models/questions';
 import setResponse from '../utils/set-response';
+import Question from '~/server/models/questions';
 
 export default defineEventHandler(async (event) => {
   if (event.node.req.method === 'GET') {

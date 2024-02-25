@@ -20,5 +20,16 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     MONGO_URL: process.env.MONGO_URL,
+    BASE_URL: process.env.BASE_URL,
+  },
+  modules: ['@nuxtjs/sitemap'],
+  sitemap: {
+    hostname: 'https://yourdomain.com',
+    gzip: true,
+    i18n: {
+      locales: ['en'],
+      routesNameSeparator: '___',
+    },
+    routes: ['/', '/quiz', '/scoreboard', '/register'],
   },
 });

@@ -8,6 +8,7 @@ export class ScoreboardApi {
 
     return data.value;
   }
+
   public static async updateScoreboard({
     username,
     email,

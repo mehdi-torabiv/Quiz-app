@@ -3,9 +3,9 @@
     <FCard class="w-1/2 text-center center-xy">
       <FTypographi tag="h1" size="2xl"> Register your self! </FTypographi>
       <div class="flex flex-col p-12 space-y-5">
-        <FInput type="text" v-model="user.username" label="Username" />
-        <FInput type="text" v-model="user.email" label="Email" />
-        <FButton @click="register" :disabled="isUserFieldEmpty">Register</FButton>
+        <FInput v-model="user.username" type="text" label="Username" />
+        <FInput v-model="user.email" type="text" label="Email" />
+        <FButton :disabled="isUserFieldEmpty" @click="register">Register</FButton>
       </div>
     </FCard>
   </div>
@@ -15,6 +15,11 @@
 import type { userType } from '../utils/types';
 import { UsersApi } from '../services/ApiServices/UsersApi';
 import { StorageService } from '../services/StorageService';
+
+useHead({
+  title: 'Register',
+  meta: [{ name: 'description', content: 'Quiz app for Fast-track' }],
+});
 
 const user = ref<userType>({
   username: '',
