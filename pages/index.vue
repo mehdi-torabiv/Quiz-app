@@ -7,7 +7,20 @@
           <FButton color-class="bg-info" class="text-white w-1/2" size="lg" @click="$router.push('/scoreboard')"
             >See Ranking</FButton
           >
-          <FButton color-class="bg-secondary" class="text-white w-1/2" size="lg" @click="$router.push('/register')"
+          <FButton
+            v-if="isUserLoggedIn"
+            color-class="bg-secondary"
+            class="text-white w-1/2"
+            size="lg"
+            @click="$router.push('/quiz')"
+            >Try Again</FButton
+          >
+          <FButton
+            v-else
+            color-class="bg-secondary"
+            class="text-white w-1/2"
+            size="lg"
+            @click="$router.push('/register')"
             >Register</FButton
           >
         </div>
@@ -17,10 +30,22 @@
 </template>
 
 <script lang="ts" setup>
+import { onMounted, ref, computed } from 'vue';
+import { StorageService } from '../services/StorageService';
+import type { User } from '../utils/interfaces';
+
 useHead({
   title: 'Home',
   meta: [{ name: 'description', content: 'Quiz app for Fast-track' }],
 });
-</script>
 
-<style></style>
+const user = ref<User | null>(null);
+
+onMounted(() => {
+  const localStorageUser = StorageService.readLocalStorage<User>('user') ?? null;
+  console.log(localStorageUser);
+  user.value = localStorageUser;
+});
+
+const isUserLoggedIn = computed(() => !!user.value);
+</script>

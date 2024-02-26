@@ -1,12 +1,14 @@
 export class ScoreboardApi {
   public static async getScoreboard() {
-    const { data } = await useFetch(`/api/scoreboard`, {
-      server: true,
-      lazy: true,
-      method: 'GET',
-    });
-
-    return data.value;
+    try {
+      const data = await $fetch('/api/scoreboard', {
+        method: 'GET',
+      });
+      return data;
+    } catch (error) {
+      console.error('Failed to get scoreboard:', error);
+      throw error;
+    }
   }
 
   public static async updateScoreboard({
@@ -18,13 +20,15 @@ export class ScoreboardApi {
     email: string;
     correctCount: number | string;
   }) {
-    const { data } = await useFetch(`/api/scoreboard`, {
-      server: true,
-      lazy: true,
-      method: 'POST',
-      body: JSON.stringify({ username, email, score: correctCount }),
-    });
-
-    return data.value;
+    try {
+      const data = await $fetch('/api/scoreboard', {
+        method: 'POST',
+        body: { username, email, score: correctCount },
+      });
+      return data;
+    } catch (error) {
+      console.error('Failed to update scoreboard:', error);
+      throw error;
+    }
   }
 }

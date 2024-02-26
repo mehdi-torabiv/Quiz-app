@@ -55,8 +55,10 @@ const userCorrectCount = ref<number>(0);
 const questions: Ref<QuizQuestion[]> = ref([]);
 
 // Fetch quiz questions from the API and populate the `questions` reactive reference.
-const data = await QuestionsApi.getQuestions();
-questions.value = transformApiResponse(data);
+const response = await QuestionsApi.getQuestions();
+if (response && response.data) {
+  questions.value = transformApiResponse(response.data);
+}
 
 /**
  * Reactive reference for storing user-selected answers. Initialized with null values, indicating unanswered questions.
@@ -136,8 +138,8 @@ const backToMain = (): void => {
 const submitQuiz = async (): Promise<void> => {
   try {
     const data = await QuestionsApi.submitAnswers(answers.value);
-    const { correctCount } = transformApiResponse(data);
 
+    const { correctCount } = transformApiResponse(data.data);
     updateScoreboard(correctCount);
   } catch (error) {
     console.error('Error submitting quiz:', error);
@@ -149,16 +151,19 @@ const updateScoreboard = async (correctCount: string | number) => {
     const user = StorageService.readLocalStorage<User>('user');
 
     if (user) {
-      const data = await ScoreboardApi.updateScoreboard({
+      const response = await ScoreboardApi.updateScoreboard({
         username: user.username,
         email: user.email,
         correctCount,
       });
-      const questionResult = transformApiResponse(data);
 
-      showUserRankNotification.value = true;
-      userRankNotificationMessage.value = questionResult.notificationMessage;
-      userCorrectCount.value = questionResult.existingScoreboard.score;
+      if (response.data) {
+        const questionResult = transformApiResponse(response.data);
+
+        showUserRankNotification.value = true;
+        userRankNotificationMessage.value = questionResult.notificationMessage;
+        userCorrectCount.value = questionResult.existingScoreboard.score;
+      }
     } else {
       console.error('User data not found in local storage');
     }

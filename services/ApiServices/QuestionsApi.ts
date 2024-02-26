@@ -1,22 +1,31 @@
 export class QuestionsApi {
   public static async getQuestions() {
-    const { data } = await useFetch(`/api/questions`, {
-      server: true,
-      lazy: true,
-      method: 'GET',
-    });
+    try {
+      const data = await $fetch(`/api/questions`, {
+        method: 'GET',
+      });
 
-    return data.value;
+      return data;
+    } catch (error) {
+      console.error('Failed to fetch questions:', error);
+      throw error;
+    }
   }
 
   public static async submitAnswers(selectedAnswerIndices: (number | null)[]) {
-    const { data } = await useFetch(`/api/questions`, {
-      server: true,
-      lazy: true,
-      method: 'POST',
-      body: selectedAnswerIndices,
-    });
+    try {
+      const data = await $fetch(`/api/questions`, {
+        method: 'POST',
+        body: selectedAnswerIndices,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-    return data.value;
+      return data;
+    } catch (error) {
+      console.error('Failed to submit answers:', error);
+      throw error;
+    }
   }
 }

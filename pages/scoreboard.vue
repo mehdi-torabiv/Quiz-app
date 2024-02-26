@@ -17,5 +17,7 @@ useHead({
 const transformedData = ref([]);
 
 const data = await ScoreboardApi.getScoreboard();
-transformedData.value = transformApiResponse(data);
+if (data) {
+  transformedData.value = transformApiResponse(data.data);
+}
 </script>

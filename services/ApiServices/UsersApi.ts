@@ -1,22 +1,26 @@
 export class UsersApi {
   public static async getUsers() {
-    const { data } = await useFetch('/api/users', {
-      server: true,
-      lazy: true,
-      method: 'GET',
-    });
-
-    return data.value;
+    try {
+      const data = await $fetch('/api/users', {
+        method: 'GET',
+      });
+      return data;
+    } catch (error) {
+      console.error('Failed to get users:', error);
+      throw error;
+    }
   }
 
   public static async createNewUser(username: string, email: string) {
-    const { data } = await useFetch('/api/users', {
-      server: true,
-      lazy: true,
-      method: 'POST',
-      body: { username, email },
-    });
-
-    return data.value;
+    try {
+      const data = await $fetch('/api/users', {
+        method: 'POST',
+        body: { username, email },
+      });
+      return data;
+    } catch (error) {
+      console.error('Failed to create new user:', error);
+      throw error;
+    }
   }
 }
