@@ -1,6 +1,8 @@
 <template>
   <transition name="page">
-    <NuxtPage />
+    <div>
+      <NuxtPage />
+    </div>
   </transition>
 </template>
 
