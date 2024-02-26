@@ -5,12 +5,12 @@
         {{ quiz.questionText }}
       </FTypographi>
     </FCard>
-    <div class="flex flex-wrap justify-between flex-1 space-x-3 my-12">
+    <div class="flex space-x-3 justify-between flex-1 my-12">
       <FButton
         v-for="(answer, index) in quiz.answers"
         :key="index"
         size="xl"
-        :class="['w-1/3 my-4']"
+        :class="['my-4 w-1/4']"
         @click="handleSelectedAnswer(index)"
       >
         {{ answer.text }}
