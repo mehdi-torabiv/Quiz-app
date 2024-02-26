@@ -25,8 +25,6 @@ export class ScoreboardApi {
       body: JSON.stringify({ username, email, score: correctCount }),
     });
 
-    console.log({ data });
-
     return data.value;
   }
 }

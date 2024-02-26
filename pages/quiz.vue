@@ -16,7 +16,7 @@
       />
     </div>
     <div v-else>
-      <UserRankNotification :message="userRankNotificationMessage" />
+      <UserRankNotification :message="userRankNotificationMessage" :correctCount="userCorrectCount" />
     </div>
   </div>
 </template>
@@ -36,6 +36,7 @@ useHead({
 
 const showUserRankNotification = ref<boolean>(false);
 const userRankNotificationMessage = ref<string>('');
+const userCorrectCount = ref<number>(0);
 
 /**
  * @file This file contains a Vue component for displaying quiz questions and navigating through them.
@@ -136,7 +137,6 @@ const submitQuiz = async (): Promise<void> => {
   try {
     const data = await QuestionsApi.submitAnswers(answers.value);
     const { correctCount } = transformApiResponse(data);
-    console.log({ correctCount });
 
     updateScoreboard(correctCount);
   } catch (error) {
@@ -158,6 +158,7 @@ const updateScoreboard = async (correctCount: string | number) => {
 
       showUserRankNotification.value = true;
       userRankNotificationMessage.value = questionResult.notificationMessage;
+      userCorrectCount.value = questionResult.existingScoreboard.score;
     } else {
       console.error('User data not found in local storage');
     }

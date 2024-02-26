@@ -65,12 +65,9 @@ const register = async () => {
 
   try {
     const response = await UsersApi.createNewUser(user.value.username, user.value.email);
-    console.log({ response });
 
     const data = response?.data;
     if (data) {
-      console.log('here');
-
       StorageService.writeLocalStorage('user', data);
       redirectToQuiz();
     } else {
