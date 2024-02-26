@@ -1,5 +1,5 @@
 <template>
-  <div class="container center-xy">
+  <div class="container mt-10">
     <FTypographi tag="h1" size="3xl" class="text-white"> Ranking Scoreboard </FTypographi>
     <FTableContainer :headers="['username', 'email', 'score']" :user-data="transformedData" />
   </div>
