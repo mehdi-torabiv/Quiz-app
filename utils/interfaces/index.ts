@@ -11,3 +11,9 @@ export interface ISetResponse {
   data?: any;
   cause?: any;
 }
+
+export interface User {
+  _id: string;
+  username: string;
+  email: string;
+}

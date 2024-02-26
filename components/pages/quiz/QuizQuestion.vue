@@ -25,7 +25,7 @@ import { type Quiz, type QuizAnswer } from '../../../utils/types';
 
 const props = defineProps<{
   quiz: Quiz;
-  selectedAnswer: QuizAnswer | null;
+  selectedAnswer?: QuizAnswer | null;
 }>();
 
 const emit = defineEmits(['selected-answer']);
@@ -33,8 +33,4 @@ const emit = defineEmits(['selected-answer']);
 function handleSelectedAnswer(answerIndex: number | string) {
   emit('selected-answer', answerIndex);
 }
-
-const isSelectedAnswer = computed(() => (answer: QuizAnswer) => {
-  return props.selectedAnswer !== null && props.selectedAnswer?._id === answer?._id;
-});
 </script>

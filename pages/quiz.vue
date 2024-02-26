@@ -27,6 +27,7 @@ import { type QuizQuestion } from '../utils/types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
 import { StorageService } from '../services/StorageService';
 import { ScoreboardApi } from '../services/ApiServices/ScoreboardApi';
+import type { User } from '../utils/interfaces';
 
 useHead({
   title: 'Quiz',
@@ -145,7 +146,7 @@ const submitQuiz = async (): Promise<void> => {
 
 const updateScoreboard = async (correctCount: string | number) => {
   try {
-    const user = StorageService.readLocalStorage('user');
+    const user = StorageService.readLocalStorage<User>('user');
 
     if (user) {
       const data = await ScoreboardApi.updateScoreboard({
