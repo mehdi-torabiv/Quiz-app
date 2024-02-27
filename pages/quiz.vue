@@ -162,6 +162,7 @@ const updateScoreboard = async (correctCount: string | number) => {
 
         showUserRankNotification.value = true;
         userRankNotificationMessage.value = questionResult.notificationMessage;
+
         userCorrectCount.value = questionResult.existingScoreboard.score;
       }
     } else {

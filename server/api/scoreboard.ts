@@ -1,19 +1,9 @@
 import setResponse from '../utils/set-response';
 import Scoreboard from '~/server/models/scoreboard';
 
-async function calculatePercentile(userRank: number, totalScores: number): Promise<string> {
-  const percentile = (userRank / totalScores) * 100;
-  let notificationMessage = '';
-  if (percentile >= 90) {
-    notificationMessage = 'You are in the top 10% of users.';
-  } else if (percentile >= 75) {
-    notificationMessage = 'You are in the top 25% of users.';
-  } else if (percentile >= 50) {
-    notificationMessage = 'You are in the top 50% of users.';
-  } else {
-    notificationMessage = 'You are in the bottom 50% of users.';
-  }
-  return notificationMessage;
+async function isUserInTopSixtyPercent(userRank: number, totalScores: number): Promise<boolean> {
+  const sixtyPercentRank = Math.ceil(totalScores * 0.4);
+  return userRank <= sixtyPercentRank;
 }
 
 export default defineEventHandler(async (event) => {
@@ -38,45 +28,24 @@ export default defineEventHandler(async (event) => {
       if (existingScoreboard) {
         existingScoreboard.score = score;
         await existingScoreboard.save();
-
-        const allScores = await Scoreboard.find({}).sort({ score: -1 });
-
-        const userRank = allScores.findIndex((entry) => entry._id === existingScoreboard._id) + 1;
-
-        const notificationMessage = await calculatePercentile(userRank, allScores.length);
-
-        return setResponse(event, {
-          statusCode: 200,
-          statusMessage: 'Score updated',
-          data: {
-            existingScoreboard,
-            notificationMessage,
-          },
-        });
       } else {
-        const scoreboardData = {
-          score,
-          email,
-          username,
-        };
-        const newScoreboard = new Scoreboard(scoreboardData);
-        await newScoreboard.save();
-
-        const allScores = await Scoreboard.find({}).sort({ score: -1 });
-
-        const userRank = allScores.length + 1;
-
-        const notificationMessage = await calculatePercentile(userRank, allScores.length);
-
-        return setResponse(event, {
-          statusCode: 201,
-          statusMessage: 'Scoreboard created',
-          data: {
-            newScoreboard,
-            notificationMessage,
-          },
-        });
+        const newScore = new Scoreboard({ score, email, username });
+        await newScore.save();
       }
+
+      const allScores = await Scoreboard.find({}).sort({ score: -1 });
+      const userRank = allScores.findIndex((entry) => entry.email === email || entry.username === username) + 1;
+      const inTopSixtyPercent = await isUserInTopSixtyPercent(userRank, allScores.length);
+
+      const statusMessage = inTopSixtyPercent
+        ? 'You are in the top 60% of users.'
+        : 'You are not in the top 60% of users.';
+
+      return setResponse(event, {
+        statusCode: 200,
+        statusMessage,
+        data: { existingScoreboard, notificationMessage: statusMessage },
+      });
     } catch (error) {
       console.error('Error saving/updating scoreboard:', error);
       return setResponse(event, { statusCode: 500, statusMessage: 'Something went wrong' });
