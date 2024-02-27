@@ -20,11 +20,11 @@
 </template>
 
 <script lang="ts" setup>
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import type { userType } from '../types';
 import { UsersApi } from '../services/ApiServices/UsersApi';
 import { StorageService } from '../services/StorageService';
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
 
 useHead({
   title: 'Register',

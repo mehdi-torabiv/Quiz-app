@@ -16,7 +16,7 @@
       />
     </div>
     <div v-else>
-      <UserRankNotification :message="userRankNotificationMessage" :correctCount="userCorrectCount" />
+      <UserRankNotification :message="userRankNotificationMessage" :correct-count="userCorrectCount" />
     </div>
   </div>
 </template>

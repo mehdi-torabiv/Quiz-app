@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
-import UserRankNotification from './UserRankNotification.vue';
 import { createRouter, createWebHistory } from 'vue-router';
+import UserRankNotification from './UserRankNotification.vue';
 
 const routes = [{ path: '/', component: { template: 'Dummy component' } }];
 const router = createRouter({
