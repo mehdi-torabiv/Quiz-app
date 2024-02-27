@@ -1,5 +1,14 @@
+import type { ApiResponse } from '#build/interfaces';
+import type { Scoreboard } from '#build/types';
+
+type udpateScoreboardPayload = {
+  username: string;
+  email: string;
+  correctCount: number | string;
+};
+
 export class ScoreboardApi {
-  public static async getScoreboard() {
+  public static async getScoreboard(): Promise<ApiResponse<Scoreboard[]>> {
     try {
       const data = await $fetch('/api/scoreboard', {
         method: 'GET',
@@ -15,11 +24,7 @@ export class ScoreboardApi {
     username,
     email,
     correctCount,
-  }: {
-    username: string;
-    email: string;
-    correctCount: number | string;
-  }) {
+  }: udpateScoreboardPayload): Promise<ApiResponse<Scoreboard[]>> {
     try {
       const data = await $fetch('/api/scoreboard', {
         method: 'POST',

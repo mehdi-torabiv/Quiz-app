@@ -1,5 +1,8 @@
+import type { ApiResponse } from '#build/interfaces';
+import type { Quiz } from '#build/types';
+
 export class QuestionsApi {
-  public static async getQuestions() {
+  public static async getQuestions(): Promise<ApiResponse<Quiz[]>> {
     try {
       const data = await $fetch(`/api/questions`, {
         method: 'GET',
@@ -12,7 +15,9 @@ export class QuestionsApi {
     }
   }
 
-  public static async submitAnswers(selectedAnswerIndices: (number | null)[]) {
+  public static async submitAnswers(
+    selectedAnswerIndices: (number | null)[],
+  ): Promise<ApiResponse<{ correctCount: string }>> {
     try {
       const data = await $fetch(`/api/questions`, {
         method: 'POST',

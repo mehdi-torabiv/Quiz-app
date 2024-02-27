@@ -1,5 +1,7 @@
+import type { ApiResponse, User } from '#build/interfaces';
+
 export class UsersApi {
-  public static async getUsers() {
+  public static async getUsers(): Promise<ApiResponse<User[]>> {
     try {
       const data = await $fetch('/api/users', {
         method: 'GET',
@@ -11,7 +13,7 @@ export class UsersApi {
     }
   }
 
-  public static async createNewUser(username: string, email: string) {
+  public static async createNewUser({ username, email }: User): Promise<ApiResponse<User>> {
     try {
       const data = await $fetch('/api/users', {
         method: 'POST',

@@ -89,7 +89,7 @@ const register = async () => {
     flex-direction: column;
     gap: 1rem;
     button {
-      width: 50%;
+      width: 100%;
     }
   }
 }
@@ -103,9 +103,6 @@ const register = async () => {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
-      button {
-        width: 100%;
-      }
     }
   }
 }
