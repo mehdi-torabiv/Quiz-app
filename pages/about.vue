@@ -10,7 +10,12 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+useHead({
+  title: 'About',
+  meta: [{ name: 'description', content: 'Quiz app for Fast-track' }],
+});
+</script>
 
 <style lang="less">
 body,

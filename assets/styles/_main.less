@@ -39,20 +39,3 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-
-@mobile-max: 767px;
-@tablet-max: 1023px;
-
-// Mixin for mobile devices
-.mobile(@rules) {
-  @media screen and (max-width: @mobile-max) {
-    @rules();
-  }
-}
-
-// Mixin for tablet devices
-.tablet(@rules) {
-  @media screen and (max-width: @tablet-max) {
-    @rules();
-  }
-}
