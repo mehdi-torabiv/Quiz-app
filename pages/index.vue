@@ -32,7 +32,7 @@
 <script lang="ts" setup>
 import { onMounted, ref, computed } from 'vue';
 import { StorageService } from '../services/StorageService';
-import type { User } from '../utils/interfaces';
+import type { User } from '../interfaces';
 
 useHead({
   title: 'Home',

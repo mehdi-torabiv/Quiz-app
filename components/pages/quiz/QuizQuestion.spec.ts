@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import QuizQuestion from './QuizQuestion.vue';
-import type { Quiz } from '../../../utils/types';
+import type { Quiz } from '../../../types';
 
 const mockQuiz: Quiz = {
   questionText: 'What is 2 + 2?',

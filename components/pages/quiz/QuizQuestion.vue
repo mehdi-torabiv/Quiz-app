@@ -21,7 +21,7 @@
 
 <script lang="ts" setup>
 import { defineProps } from 'vue';
-import { type Quiz, type QuizAnswer } from '../../../utils/types';
+import { type Quiz, type QuizAnswer } from '../../../types';
 
 const props = defineProps<{
   quiz: Quiz;

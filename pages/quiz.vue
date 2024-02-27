@@ -23,11 +23,11 @@
 
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
-import { type QuizQuestion } from '../utils/types';
+import { type QuizQuestion } from '../types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
 import { StorageService } from '../services/StorageService';
 import { ScoreboardApi } from '../services/ApiServices/ScoreboardApi';
-import type { User } from '../utils/interfaces';
+import type { User } from '../interfaces';
 
 useHead({
   title: 'Quiz',

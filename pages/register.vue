@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { userType } from '../utils/types';
+import type { userType } from '../types';
 import { UsersApi } from '../services/ApiServices/UsersApi';
 import { StorageService } from '../services/StorageService';
 import { ref, computed } from 'vue';
