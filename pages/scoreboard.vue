@@ -8,7 +8,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { ScoreboardApi } from '../services/ApiServices/ScoreboardApi';
-import { type Scoreboard } from '#build/types';
+import { type Scoreboard } from '../types';
 
 useHead({
   title: 'Scoreboard',

@@ -1,5 +1,5 @@
-import type { ApiResponse } from '#build/interfaces';
-import type { Quiz, QuizQuestion } from '#build/types';
+import type { ApiResponse } from '../../interfaces';
+import type { Quiz, QuizQuestion } from '../../types';
 
 export class QuestionsApi {
   public static async getQuestions(): Promise<ApiResponse<QuizQuestion[]>> {

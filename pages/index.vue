@@ -43,7 +43,6 @@ const user = ref<User | null>(null);
 
 onMounted(() => {
   const localStorageUser = StorageService.readLocalStorage<User>('user') ?? null;
-  console.log(localStorageUser);
   user.value = localStorageUser;
 });
 

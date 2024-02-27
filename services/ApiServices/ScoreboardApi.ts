@@ -1,5 +1,5 @@
 import type { ApiResponse, UpdateScoreboardResponse } from '#build/interfaces';
-import type { Scoreboard } from '#build/types';
+import type { Scoreboard } from '../../types';
 
 type udpateScoreboardPayload = {
   username: string;

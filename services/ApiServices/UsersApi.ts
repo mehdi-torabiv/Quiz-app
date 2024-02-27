@@ -1,4 +1,4 @@
-import type { ApiResponse, User } from '#build/interfaces';
+import type { ApiResponse, User } from '../../interfaces';
 
 export class UsersApi {
   public static async getUsers(): Promise<ApiResponse<User[]>> {
