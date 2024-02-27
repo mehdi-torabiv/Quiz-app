@@ -1,8 +1,8 @@
 import type { ApiResponse } from '#build/interfaces';
-import type { Quiz } from '#build/types';
+import type { Quiz, QuizQuestion } from '#build/types';
 
 export class QuestionsApi {
-  public static async getQuestions(): Promise<ApiResponse<Quiz[]>> {
+  public static async getQuestions(): Promise<ApiResponse<QuizQuestion[]>> {
     try {
       const data = await $fetch(`/api/questions`, {
         method: 'GET',

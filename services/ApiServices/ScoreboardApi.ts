@@ -1,4 +1,4 @@
-import type { ApiResponse } from '#build/interfaces';
+import type { ApiResponse, UpdateScoreboardResponse } from '#build/interfaces';
 import type { Scoreboard } from '#build/types';
 
 type udpateScoreboardPayload = {
@@ -24,7 +24,7 @@ export class ScoreboardApi {
     username,
     email,
     correctCount,
-  }: udpateScoreboardPayload): Promise<ApiResponse<Scoreboard[]>> {
+  }: udpateScoreboardPayload): Promise<ApiResponse<UpdateScoreboardResponse>> {
     try {
       const data = await $fetch('/api/scoreboard', {
         method: 'POST',

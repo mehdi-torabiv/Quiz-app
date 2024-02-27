@@ -27,7 +27,7 @@ import { type QuizQuestion } from '../types';
 import { QuestionsApi } from '../services/ApiServices/QuestionsApi';
 import { StorageService } from '../services/StorageService';
 import { ScoreboardApi } from '../services/ApiServices/ScoreboardApi';
-import type { User } from '../interfaces';
+import type { UpdateScoreboardResponse, User } from '../interfaces';
 
 useHead({
   title: 'Quiz',
@@ -57,7 +57,7 @@ const questions: Ref<QuizQuestion[]> = ref([]);
 // Fetch quiz questions from the API and populate the `questions` reactive reference.
 const response = await QuestionsApi.getQuestions();
 if (response && response.data) {
-  questions.value = transformApiResponse(response.data);
+  questions.value = response.data;
 }
 
 /**
@@ -137,10 +137,11 @@ const backToMain = (): void => {
  */
 const submitQuiz = async (): Promise<void> => {
   try {
-    const data = await QuestionsApi.submitAnswers(answers.value);
-
-    const { correctCount } = transformApiResponse(data.data);
-    updateScoreboard(correctCount);
+    const response = await QuestionsApi.submitAnswers(answers.value);
+    if (response && response.data) {
+      const { correctCount } = response.data;
+      updateScoreboard(correctCount);
+    }
   } catch (error) {
     console.error('Error submitting quiz:', error);
   }
@@ -157,8 +158,8 @@ const updateScoreboard = async (correctCount: string | number) => {
         correctCount,
       });
 
-      if (response.data) {
-        const questionResult = transformApiResponse(response.data);
+      if (response && response.data) {
+        const questionResult: UpdateScoreboardResponse = response.data;
 
         showUserRankNotification.value = true;
         userRankNotificationMessage.value = questionResult.notificationMessage;

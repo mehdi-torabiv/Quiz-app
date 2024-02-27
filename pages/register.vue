@@ -64,10 +64,10 @@ const register = async () => {
   if (isFormInvalid.value) return;
 
   try {
-    const data = await UsersApi.createNewUser(user.value.username, user.value.email);
+    const response = await UsersApi.createNewUser({ username: user.value.username, email: user.value.email });
 
-    if (data) {
-      StorageService.writeLocalStorage('user', data.data);
+    if (response) {
+      StorageService.writeLocalStorage('user', response.data);
       redirectToQuiz();
     } else {
       console.error('No data received in the response');

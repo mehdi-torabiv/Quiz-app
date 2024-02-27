@@ -8,16 +8,17 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { ScoreboardApi } from '../services/ApiServices/ScoreboardApi';
+import { type Scoreboard } from '#build/types';
 
 useHead({
   title: 'Scoreboard',
   meta: [{ name: 'description', content: 'Quiz app for Fast-track' }],
 });
 
-const transformedData = ref([]);
+const transformedData = ref<Scoreboard[]>([]);
 
-const data = await ScoreboardApi.getScoreboard();
-if (data) {
-  transformedData.value = transformApiResponse(data.data);
+const response = await ScoreboardApi.getScoreboard();
+if (response && response.data) {
+  transformedData.value = response.data;
 }
 </script>

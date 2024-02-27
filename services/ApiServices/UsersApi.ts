@@ -13,7 +13,7 @@ export class UsersApi {
     }
   }
 
-  public static async createNewUser({ username, email }: User): Promise<ApiResponse<User>> {
+  public static async createNewUser({ username, email }: Omit<User, '_id'>): Promise<ApiResponse<User>> {
     try {
       const data = await $fetch('/api/users', {
         method: 'POST',
