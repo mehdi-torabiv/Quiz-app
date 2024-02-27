@@ -16,7 +16,7 @@ Before you begin, ensure you have the following installed on your local machine:
 
         bashCopy code
 
-        `git clone https://github.com/yourusername/nuxt-app.git
+        `git clone https://github.com/mehdi-torabiv/quiz-app
 
     cd nuxt-app`
 
