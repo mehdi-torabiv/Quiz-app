@@ -24,6 +24,11 @@
             >Register</FButton
           >
         </div>
+        <div class="my-2">
+          <FButton color-class="bg-warning" class="text-white w-full" size="lg" @click="$router.push('/about')">
+            About us
+          </FButton>
+        </div>
       </div>
     </FCard>
   </div>

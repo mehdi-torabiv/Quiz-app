@@ -32,6 +32,6 @@ export default defineNuxtConfig({
       locales: ['en'],
       routesNameSeparator: '___',
     },
-    routes: ['/', '/quiz', '/scoreboard', '/register'],
+    routes: ['/', '/quiz', '/scoreboard', '/register', '/about'],
   },
 });
