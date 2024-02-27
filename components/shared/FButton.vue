@@ -1,6 +1,6 @@
 <template>
   <button
-    :class="['base-button', colorClass, variantClass, sizeClass]"
+    :class="['base-button', colorClass, variantClass, sizeClass, customClass]"
     v-bind="$attrs"
     :disabled="disabled"
     :aria-label="ariaLabel"
@@ -22,6 +22,7 @@ import { defineProps, defineEmits, computed } from 'vue';
  * @property {Boolean} [disabled=false] - Whether the button is disabled.
  * @property {String} [type=button] - The type of button ('button', 'submit', 'reset').
  * @property {String} [ariaLabel] - Aria label for accessibility.
+ * @property {String} [customClass] - The class to set custom class from parent.
  */
 
 /** @type {ButtonProps} */
@@ -47,6 +48,7 @@ const props = defineProps({
     default: 'button',
   },
   ariaLabel: String,
+  customClass: String,
 });
 
 /**

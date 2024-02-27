@@ -7,7 +7,7 @@
 
     <div>
       <FButton v-if="hasNext" size="xl" @click="next">Next</FButton>
-      <FButton v-else size="xl" @click="submitQuiz">Submit Quiz</FButton>
+      <FButton v-else size="xl" @click="submitQuiz">Submit</FButton>
     </div>
   </div>
 </template>

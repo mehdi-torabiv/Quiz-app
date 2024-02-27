@@ -1,5 +1,5 @@
 <template>
-  <div class="container center-xy w-1/2 mx-auto">
+  <div class="container quiz-container center-xy mx-auto">
     <div v-if="!showUserRankNotification">
       <QuizQuestion
         v-if="questions.length > 0"
@@ -172,3 +172,20 @@ const updateScoreboard = async (correctCount: string | number) => {
   }
 };
 </script>
+
+<style scoped lang="less">
+.quiz-container {
+  width: 40%;
+}
+@media screen and (max-width: 768px) {
+  .quiz-container {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1400px) {
+  .quiz-container {
+    width: 80%;
+  }
+}
+</style>

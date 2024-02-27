@@ -1,11 +1,13 @@
 <template>
-  <section class="parallax-container"></section>
-  <section class="buffer">
-    <div class="bg-white text-center p-4" style="min-height: 20vh">
-      <FTypographi tag="h1" size="3xl"> Simple parralex with scroll for quiz app! </FTypographi>
-    </div>
-  </section>
-  <section class="parallax-container parallax-container2"></section>
+  <div>
+    <section class="parallax-container"></section>
+    <section class="buffer">
+      <div class="bg-white text-center p-4" style="min-height: 20vh">
+        <FTypographi tag="h1" size="3xl"> Simple parralex with scroll for quiz app! </FTypographi>
+      </div>
+    </section>
+    <section class="parallax-container parallax-container2"></section>
+  </div>
 </template>
 
 <script setup></script>
@@ -24,7 +26,6 @@ html {
   align-items: center;
   justify-content: center;
 
-  /*  this is where the magic happens:  */
   background-attachment: fixed;
 
   background-image: url('../static/malta-1.webp');

@@ -1,8 +1,8 @@
 <template>
   <div class="container">
-    <FCard class="w-1/2 text-center center-xy">
-      <FTypographi tag="h1" size="3xl" class="pt-5">Register yourself!</FTypographi>
-      <div class="flex flex-col p-12 space-y-5">
+    <FCard class="regirster-container text-center center-xy">
+      <FTypographi tag="h1" class="regirster-container__title pt-5">Register yourself!</FTypographi>
+      <div class="regirster-container__buttons p-5">
         <div class="text-left">
           <FInput v-model="user.username" type="text" label="Username" />
           <span v-if="usernameError" class="text-error text-sm">{{ usernameError }}</span>
@@ -77,3 +77,42 @@ const register = async () => {
   }
 };
 </script>
+
+<style scoped lang="less">
+.regirster-container {
+  width: 40%;
+  .regirster-container__title {
+    font-size: 2rem;
+  }
+  .regirster-container__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    button {
+      width: 50%;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .regirster-container {
+    width: 90%;
+    .regirster-container__title {
+      font-size: 1.3rem;
+    }
+    .regirster-container__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1400px) {
+  .regirster-container {
+    width: 80%;
+  }
+}
+</style>

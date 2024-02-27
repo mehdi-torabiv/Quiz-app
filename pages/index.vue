@@ -1,26 +1,21 @@
 <template>
   <div class="container">
-    <FCard class="px-6 py-6 w-1/2 center-xy">
+    <FCard class="px-6 py-6 index-container center-xy">
       <div class="flex flex-col">
-        <FTypographi tag="h1" size="5xl" class="text-center">Welcome to Fast track Quiz app!</FTypographi>
-        <div class="flex flex-row jusitfy-between space-x-2 pt-12">
-          <FButton color-class="bg-info" class="text-white w-1/2" size="lg" @click="$router.push('/scoreboard')"
+        <FTypographi tag="h1" class="index-container__title text-center">Welcome to Fast track Quiz app!</FTypographi>
+        <div class="index-container__buttons pt-12">
+          <FButton color-class="bg-info" class="text-white" size="lg" @click="$router.push('/scoreboard')"
             >See Ranking</FButton
           >
           <FButton
             v-if="isUserLoggedIn"
             color-class="bg-secondary"
-            class="text-white w-1/2"
+            class="text-white"
             size="lg"
             @click="$router.push('/quiz')"
             >Try Again</FButton
           >
-          <FButton
-            v-else
-            color-class="bg-secondary"
-            class="text-white w-1/2"
-            size="lg"
-            @click="$router.push('/register')"
+          <FButton v-else color-class="bg-secondary" class="text-white" size="lg" @click="$router.push('/register')"
             >Register</FButton
           >
         </div>
@@ -54,3 +49,42 @@ onMounted(() => {
 
 const isUserLoggedIn = computed(() => !!user.value);
 </script>
+
+<style scoped lang="less">
+.index-container {
+  width: 40%;
+  .index-container__title {
+    font-size: 2rem;
+  }
+  .index-container__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    button {
+      width: 50%;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .index-container {
+    width: 90%;
+    .index-container__title {
+      font-size: 1.3rem;
+    }
+    .index-container__buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1400px) {
+  .index-container {
+    width: 80%;
+  }
+}
+</style>
